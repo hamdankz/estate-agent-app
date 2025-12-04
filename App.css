@@ -1,0 +1,499 @@
+/* ===================== OVERALL ===================== */
+body, html {
+font-family: 'Arial', sans-serif;
+font-size: 16px;
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+background: #232323;
+color: #ffffff;
+}
+
+* {
+  font-family: inherit;
+  }
+
+/* ===================== HEADER ===================== */
+
+.headerRow {
+display: flex;
+justify-content: space-between;
+align-items: center;
+width: 100%;
+color: #333333;
+}
+
+.headerRow .left, .headerRow .right {
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+/* ===================== HERO ===================== */
+.heroCard {
+background: #404040;
+border-radius: 16px;
+padding: 24px;
+border: 1px solid #3EB489;
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+text-align: center;
+color: white;
+}
+
+/* ===================== FILTER ===================== */
+.filterSection {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #404040; /* Dark background */
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #3EB489;
+  color: white; /* Text color */
+}
+
+.filterTitle {
+text-align: center;
+font-size: 28px;
+margin-bottom: 20px;
+color: #333333;
+color: white;
+}
+
+.filterForm {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+gap: 20px;
+color: white;
+}
+
+.filterGroup label {
+font-weight: bold;
+margin-bottom: 6px;
+color: #333333;
+color: white;
+}
+
+.filterGroup input,
+.filterGroup select {
+padding: 12px 16px;
+font-size: 16px;
+height: 44px;
+width: 200px;
+border-radius: 8px;
+border: 1px solid #bce6d4;
+box-sizing: border-box;
+}
+
+.filterGroup input:focus,
+.filterGroup select:focus {
+border-color: #3EB489;
+outline: none;
+}
+
+.filterButtonWrapper {
+grid-column: 1 / -1;
+display: flex;
+justify-content: center;
+margin-top: 10px;
+}
+
+.filterButton {
+background-color: #3EB489;
+color: white;
+padding: 12px 25px;
+border: none;
+border-radius: 8px;
+font-size: 16px;
+cursor: pointer;
+}
+
+.filterButton:hover {
+background-color: #34a07c;
+}
+
+.ClearBtn{
+background-color: #b43e3e;
+color: white;
+padding: 12px 25px;
+border: none;
+border-radius: 8px;
+font-size: 16px;
+cursor: pointer;
+width: 300px;
+}
+
+.ClearBtn:hover{
+  background-color: #a03434;
+}
+
+.resetButton {
+  margin-left: 10px;
+  padding: 8px 16px;
+  border: 1px solid #888;
+  background: #f5f5f5;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  color: #23825f;
+}
+
+.resetButton:hover {
+  background: #e4e4e4;
+}
+
+
+/* ===================== PROPERTIES GRID ===================== */
+.properties-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 20px;
+margin: 20px 0;
+margin-left: 45px;
+}
+
+.property-card {
+  background: #404040; /* Dark background */
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #3EB489; /* Optional: border color for contrast */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  text-align: center;
+  color: white; /* Text color */
+}
+
+.property-image {
+width: 100%;
+height: 180px;
+object-fit: cover;
+border-radius: 8px;
+}
+
+.property-info {
+margin-top: 12px;
+}
+
+.property-action button {
+margin-top: 10px;
+padding: 8px 16px;
+cursor: pointer;
+background-color: #3EB489;
+color: white;
+border: none;
+border-radius: 6px;
+}
+
+.property-action button:hover {
+background-color: #34a07c;
+}
+
+/* ===================== FAVOURITES ===================== */
+.favourites-section {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 16px;
+  background-color: #404040; /* Dark background */
+  border-radius: 12px;
+  border: 1px solid #3EB489;
+  color: white; /* Make text readable */
+}
+
+.favouriteDropZone {
+  height: 150px;
+  border: 2px dashed #3EB489;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  color: white;
+  background-color: #595959; /* Dark background */
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.favouriteDropZone.dragOver {
+  border-color: #007bff;
+  background-color: #505050; /* Slightly lighter on drag over */
+}
+
+.favouriteItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  background-color: #505050; /* Dark card background */
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #3EB489;
+  color: white;
+}
+
+.property-image-small {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.ClearBtn {
+  background-color: #b43e3e;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.ClearBtn:hover {
+  background-color: #a03434;
+}
+
+.favouriteItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.favouriteItem img {
+  width: 60px;     /* smaller thumbnail size */
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.favouriteItem strong {
+  font-size: 14px;
+}
+
+.favouriteItem button {
+  margin-left: auto;
+  padding: 5px 8px;
+  font-size: 12px;
+}
+
+
+/* ===================== SEARCH BOX ===================== */
+.searchBox {
+width: 100%;
+max-width: 400px;
+padding: 12px 16px;
+font-size: 16px;
+margin: 0 auto 20px auto;
+display: block;
+border: 1px solid #bce6d4;
+border-radius: 8px;
+box-sizing: border-box;
+}
+
+/* ===================== SEARCH PAGE ===================== */
+.search-page-container {
+display: flex;
+gap: 20px;
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 10px;
+position: relative;
+}
+
+.search-left {
+flex: 2;
+margin-right: 320px;
+}
+
+.favourites-section {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 300px;
+  max-height: 610px;
+  overflow-y: auto;
+  background-color: #404040; /* Dark background */
+  border: 1px solid #3EB489;
+  border-radius: 12px;
+  padding: 16px;
+  z-index: 999;
+  color: white; /* Ensure text is readable */
+}
+
+
+/*PROPERTY PAGE CODE*/
+
+.property-page-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  color: white;
+  font-family: sans-serif;
+}
+
+.property-top-row {
+  display: flex;
+  flex-wrap: wrap;
+  height: 50%; /*TEST*/
+  gap: 20px;
+}
+
+.property-images {
+  flex: 2;
+  min-width: 300px;
+
+}
+
+.property-main-image {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover; /* fills nicely */
+}
+
+.property-details {
+  flex: 1;
+  min-width: 250px;
+  background-color: #404040;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #3EB489;
+}
+
+.property-details h1 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.property-price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #3EB489;
+  margin-bottom: 10px;
+}
+
+.property-map-full {
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #3EB489;
+}
+
+.property-map-full h2 {
+  background-color: #404040;
+  padding: 10px;
+  margin: 0;
+  text-align: center;
+}
+
+
+
+/*DISPLAY IMAGES*/
+
+.property-images {
+  position: relative;
+  flex: 2;
+  min-width: 300px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.property-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #3EB489;
+}
+
+/* Arrows */
+.image-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 35px;
+  background: rgba(0,0,0,0.4);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 10;
+  transition: 0.2s ease;
+}
+
+.image-arrow:hover {
+  background: rgba(0,0,0,0.6);
+}
+
+.image-arrow.left {
+  left: 10px;
+}
+
+.image-arrow.right {
+  right: 10px;
+}
+
+
+/* Large Description below the images, above map */
+.property-large-description {
+  width: 96.5%;
+  background-color: #404040;
+  border: 1px solid #3EB489;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+.property-large-description h2 {
+  margin-bottom: 15px;
+}
+
+.property-large-description p {
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+
+/* Floorplan image */
+
+.FloorplanImage{
+  border: 1px solid #3EB489;
+  display: flex;
+  margin-top: 15px;
+  height: 35%;
+  width: 35%;
+}
+
+
+/* SLIDESHOW */
+
+/* Thumbnail strip */
+.thumbnail-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.thumbnail {
+  width: 70px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: 0.2s;
+  border: 2px solid transparent;
+}
+
+.thumbnail:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.active-thumb {
+  opacity: 1;
+  border-color: #3EB489;
+  transform: scale(1.1);
+}
