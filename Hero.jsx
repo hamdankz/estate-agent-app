@@ -13,7 +13,7 @@ function Hero() {
             <h1>Find Your Perfect Home</h1>
             <p>Search thousands of properties across London with smart filters.</p>
 
-            <Link to="/search">Start Searching</Link>
+            <Link to="/search" className="headerbutton">Start Searching</Link>
             
             </div>
 
