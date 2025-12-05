@@ -3,7 +3,9 @@ import ListItems from "./ListItems";
 
 function FavouriteProperties({ favouriteProperties, removeFavourite, onDrop, clearFavourites }) {
   const [isDragOver, setIsDragOver] = useState(false);
+  const [draggedItem, setDraggedItem] = useState(null);
 
+  // When something is dragged over the favourite zone
   const handleDragOver = (e) => {
     e.preventDefault();
     setIsDragOver(true);
@@ -14,11 +16,30 @@ function FavouriteProperties({ favouriteProperties, removeFavourite, onDrop, cle
     setIsDragOver(false);
   };
 
+  // When something is dropped INTO favourites
   const handleDrop = (e) => {
     e.preventDefault();
     setIsDragOver(false);
+
     const data = e.dataTransfer.getData("application/json");
     if (data) onDrop(JSON.parse(data));
+  };
+
+  // Called when user starts dragging a favourite property OUT
+  const handleFavouriteDragStart = (property) => {
+    setDraggedItem(property);
+  };
+
+  // Called when drag ends ANYWHERE
+  const handleFavouriteDragEnd = (e) => {
+    // If drag ended *outside* the favourites box → remove from favourites
+    const favouritesBox = e.target.closest(".favourites-section");
+
+    if (!favouritesBox) {
+      removeFavourite(draggedItem);
+    }
+
+    setDraggedItem(null);
   };
 
   return (
@@ -30,14 +51,11 @@ function FavouriteProperties({ favouriteProperties, removeFavourite, onDrop, cle
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-
       >
         Drag properties here to add to favourites
       </div>
 
-      <button className="ClearBtn"
-        onClick={clearFavourites}
-      >
+      <button className="ClearBtn" onClick={clearFavourites}>
         Clear All
       </button>
 
@@ -47,12 +65,19 @@ function FavouriteProperties({ favouriteProperties, removeFavourite, onDrop, cle
         <ListItems
           items={favouriteProperties}
           renderItem={(p) => (
-            <div className="favouriteItem">
-              <img src={p.picture} alt={p.type}/>
+            <div
+              className="favouriteItem"
+              draggable
+              onDragStart={() => handleFavouriteDragStart(p)}
+              onDragEnd={handleFavouriteDragEnd}
+            >
+              <img src={p.picture} alt={p.type} />
+
               <div>
                 <strong>{p.type} - £{p.price.toLocaleString()}</strong>
                 <div style={{ fontSize: "12px" }}>{p.location}</div>
               </div>
+
               <button onClick={() => removeFavourite(p)}>Remove</button>
             </div>
           )}
