@@ -1,39 +1,52 @@
 import { useState } from "react";
 
 function Filter({ onSearch }) {
-  const priceOptions = [50000, 100000, 150000, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 900000, 1000000];
-  const bedroomOptions = [0, 1, 2, 3, 4, 5, 6];
-
   const [type, setType] = useState("");
   const [postcode, setPostcode] = useState("");
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
-  const [minBeds, setMinBeds] = useState("");
-  const [maxBeds, setMaxBeds] = useState("");
+
+  // SLIDERS (prices)
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(1500000);
+
+  // SLIDERS (bedrooms)
+  const [minBeds, setMinBeds] = useState(0);
+  const [maxBeds, setMaxBeds] = useState(6);
+
+  // DATE PICKER
   const [dateAdded, setDateAdded] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch({ type, postcode, minPrice, maxPrice, minBeds, maxBeds, dateAdded });
+    onSearch({
+      type,
+      postcode,
+      minPrice,
+      maxPrice,
+      minBeds,
+      maxBeds,
+      dateAdded,
+    });
   };
 
   const resetFilters = () => {
     setType("");
     setPostcode("");
-    setMinPrice("");
-    setMaxPrice("");
-    setMinBeds("");
-    setMaxBeds("");
+    setMinPrice(0);
+    setMaxPrice(1500000);
+    setMinBeds(0);
+    setMaxBeds(6);
     setDateAdded("");
 
-    onSearch({}); // clears results
+    onSearch({});
   };
 
   return (
     <section className="filterSection">
       <h2 className="filterTitle">Search Properties</h2>
+
       <form className="filterForm" onSubmit={handleSubmit}>
-        
+
+        {/* PROPERTY TYPE */}
         <div className="filterGroup">
           <label>Property Type</label>
           <select value={type} onChange={(e) => setType(e.target.value)}>
@@ -48,65 +61,94 @@ function Filter({ onSearch }) {
           <label>Postcode Area</label>
           <input
             type="text"
-            placeholder="Any"
+            placeholder="BR5, SE20, etc."
             value={postcode}
             onChange={(e) => setPostcode(e.target.value)}
           />
         </div>
 
-        <div className="filterGroup">
-          <label>Minimum Price</label>
-          <select value={minPrice} onChange={(e) => setMinPrice(e.target.value)}>
-            <option value="">Any</option>
-            {priceOptions.map((p) => <option key={p} value={p}>{p.toLocaleString()}</option>)}
-          </select>
-        </div>
+{/* PRICE SLIDER */}
+<div className="filterGroup sliderGroup">
+  <label>
+    Price Range (£{minPrice.toLocaleString()} - £{maxPrice.toLocaleString()})
+  </label>
 
-        <div className="filterGroup">
-          <label>Maximum Price</label>
-          <select value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)}>
-            <option value="">Any</option>
-            {priceOptions
-              .filter((p) => minPrice === "" || p >= Number(minPrice))
-              .map((p) => <option key={p} value={p}>{p.toLocaleString()}</option>)}
-          </select>
-        </div>
+  {/* MIN PRICE */}
+  <input
+    type="range"
+    min="0"
+    max="1500000"
+    step="50000"
+    value={minPrice}
+    onChange={(e) => {
+      const value = Number(e.target.value);
+      if (value <= maxPrice) setMinPrice(value); // Prevent crossing
+    }}
+  />
 
-        <div className="filterGroup">
-          <label>Minimum Bedrooms</label>
-          <select value={minBeds} onChange={(e) => setMinBeds(e.target.value)}>
-            <option value="">Any</option>
-            {bedroomOptions.map((b) => <option key={b} value={b}>{b}</option>)}
-          </select>
-        </div>
+  {/* MAX PRICE */}
+  <input
+    type="range"
+    min="0"
+    max="1500000"
+    step="50000"
+    value={maxPrice}
+    onChange={(e) => {
+      const value = Number(e.target.value);
+      if (value >= minPrice) setMaxPrice(value); // Prevent crossing
+    }}
+  />
+</div>
 
-        <div className="filterGroup">
-          <label>Maximum Bedrooms</label>
-          <select value={maxBeds} onChange={(e) => setMaxBeds(e.target.value)}>
-            <option value="">Any</option>
-            {bedroomOptions
-              .filter((b) => minBeds === "" || b >= Number(minBeds))
-              .map((b) => <option key={b} value={b}>{b}</option>)}
-          </select>
-        </div>
 
+        {/* BEDROOM SLIDER */}
+<div className="filterGroup sliderGroup">
+  <label>Bedrooms ({minBeds} - {maxBeds})</label>
+
+  {/* MIN BEDS */}
+  <input
+    type="range"
+    min="0"
+    max="6"
+    value={minBeds}
+    onChange={(e) => {
+      const value = Number(e.target.value);
+      if (value <= maxBeds) setMinBeds(value);
+    }}
+  />
+
+  {/* MAX BEDS */}
+  <input
+    type="range"
+    min="0"
+    max="6"
+    value={maxBeds}
+    onChange={(e) => {
+      const value = Number(e.target.value);
+      if (value >= minBeds) setMaxBeds(value);
+    }}
+  />
+</div>
+
+
+        {/* DATE PICKER */}
         <div className="filterGroup">
           <label>Date Added</label>
-          <input type="date" value={dateAdded} onChange={(e) => setDateAdded(e.target.value)} />
+          <input
+            type="date"
+            value={dateAdded}
+            onChange={(e) => setDateAdded(e.target.value)}
+          />
         </div>
 
+        {/* BUTTONS */}
         <div className="filterButtonWrapper">
           <button className="filterButton" type="submit">Search</button>
-
-          {/* RESET BUTTON */}
-          <button
-            type="button"
-            className="resetButton"
-            onClick={resetFilters}
-          >
+          <button type="button" className="resetButton" onClick={resetFilters}>
             Reset
           </button>
         </div>
+
       </form>
     </section>
   );
