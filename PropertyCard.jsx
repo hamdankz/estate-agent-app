@@ -32,6 +32,8 @@ const handleClick = () => {
         <div className="property-location">{property.location}</div>
         <div className="property-price">£{property.price.toLocaleString()}</div>
 
+        <div className="card-description">{property.description}</div>
+
         <div className="property-action">
           {showRemove ? (
             <button onClick={(e) => { e.stopPropagation(); onRemoveFavourite(property); }}>Remove</button>
