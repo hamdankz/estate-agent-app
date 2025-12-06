@@ -1,11 +1,10 @@
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
+import { usePropertyContext } from "../Context/PropertyContext";
 
-function Favourites({
-  favouriteProperties = [],
-  removeFavourite = () => {},
-  clearFavourites = () => {}
-}) {
+function Favourites() {
+  const { favourites, removeFavourite, clearFavourites } = usePropertyContext();
+
   return (
     <>
       <Header />
@@ -15,16 +14,17 @@ function Favourites({
 
         {/* Favourite properties list */}
         <div className="favPage-list">
-          {favouriteProperties.length === 0 ? (
+          {favourites.length === 0 ? (
             <p className="favPage-empty">No favourite properties yet.</p>
           ) : (
-            favouriteProperties.map((p) => (
+            favourites.map((p) => (
               <div className="favPage-card" key={p.id}>
                 <img className="favPage-img" src={p.picture} alt={p.type} />
                 <div className="favPage-info">
                   <h3>{p.type} — £{p.price.toLocaleString()}</h3>
                   <p>{p.location}</p>
                 </div>
+
                 <button
                   className="favPage-removeBtn"
                   onClick={() => removeFavourite(p)}
@@ -36,9 +36,8 @@ function Favourites({
           )}
         </div>
 
-
         {/* Clear All button below the list */}
-        {favouriteProperties.length > 0 && (
+        {favourites.length > 0 && (
           <div className="favPage-controls">
             <button className="ClearBtn" onClick={clearFavourites}>
               Clear All
