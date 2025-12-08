@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
+import { usePropertyContext } from "../../Context/PropertyContext";
+
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 import img1 from "../../assets/Prop5-images/image1.jpeg";
 import img2 from "../../assets/Prop5-images/image2.jpeg";
@@ -12,98 +15,160 @@ import img6 from "../../assets/Prop5-images/image6.jpeg";
 import img7 from "../../assets/Prop5-images/image7.jpeg";
 import img8 from "../../assets/Prop5-images/image8.jpeg";
 
+// Array containing all property images for the slideshow
+const propertyImages = [img1, img2, img3, img4, img5, img6, img7, img8];
 
-const propertyImages = [
-  img1, img2, img3, img4, img5,
-  img6, img7, img8
-];
+function PropertyPage5() {
+  // Get favorites functionality from context - this allows adding/removing favorites
+  const { favourites, addFavourite, removeFavourite } = usePropertyContext();
 
-function PropertyPage5({ property, onFavourite, onRemoveFavourite, isFavourited, showRemove = false }) {
+  // PROPERTY DATA FOR THIS PAGE
+  // Hardcoded property object for this specific property page
+  const property = {
+    id: 1,  // Unique identifier for this property
+    picture: img1,  // Main image
+    type: "3 Bedroom Semi Detached",  // Property type
+    price: 750000,  // Property price
+    location: "Petts Wood Road, Orpington",  // Location
+  };
+
+  // Check if this property is already in favorites
+  // .some() returns true if any favorite has the same id as this property
+  const isFavourited = favourites.some((p) => p.id === property.id);
+
+  // State to track which image is currently displayed in the slideshow
   const [currentImage, setCurrentImage] = useState(0);
 
-  const nextImage = () => setCurrentImage((prev) => (prev + 1) % propertyImages.length);
-  const prevImage = () => setCurrentImage((prev) => (prev - 1 + propertyImages.length) % propertyImages.length);
+  // Function to show next image in slideshow
+  // Uses modulo operator to loop back to first image after last
+  const nextImage = () =>
+    setCurrentImage((prev) => (prev + 1) % propertyImages.length);
+
+  // Function to show previous image in slideshow
+  // Adds propertyImages.length before modulo to handle negative values
+  const prevImage = () =>
+    setCurrentImage((prev) => (prev - 1 + propertyImages.length) % propertyImages.length);
 
   return (
     <>
       <Header />
 
-      <br />
-      <br />
+      {/* Button to return to search page */}
+      <button className="return-btn">
+        <Link to="/search">Return to Search Page</Link>
+      </button>
 
-      <button><Link to="/search">Return to Search Page</Link></button>
+      <div className="container">
+        <div className="tabs-container">
+          {/* React-tabs component for tabbed interface */}
+          <Tabs>
+            <TabList>
+              <Tab>Photos</Tab>
+              <Tab>Description</Tab>
+              <Tab>Floorplan</Tab>
+              <Tab>Maps</Tab>
+            </TabList>
 
-      
-      <div className="property-page-container">
+            {/* ---------------- PHOTOS TAB ---------------- */}
+            <TabPanel>
+              <br />
 
-        <div className="property-top-row">
-          {/* IMAGES */}
-          <div className="property-images">
-            <button className="image-arrow left" onClick={prevImage}>❮</button>
-            <img src={propertyImages[currentImage]} className="property-main-image" />
-            <button className="image-arrow right" onClick={nextImage}>❯</button>
-          </div>
+              <div className="property-top-row">
+                {/* LEFT: Slideshow section */}
+                <div className="property-images">
+                  {/* Left arrow button for previous image */}
+                  <button className="image-arrow left" onClick={prevImage}>❮</button>
 
-          {/* DETAILS */}
-          <div className="property-details">
-            <h1>Apartment in Stratford, London E15</h1>
-            <p className="property-price">£375,000</p>
-            <p>Bedrooms: 2</p>
-            <p>Tenure: Leasehold</p>
+                  {/* Main property image that changes based on currentImage state */}
+                  <img
+                    src={propertyImages[currentImage]}
+                    alt="Property"
+                    className="property-main-image"
+                  />
 
-            {/* ACTION */}
-            <div className="property-action">
-              {showRemove ? (
-                <button onClick={(e) => { e.stopPropagation(); onRemoveFavourite(property); }}>Remove</button>
-              ) : (
-                <button
-                  disabled={isFavourited}
-                  className={`btn ${isFavourited ? "btn-disabled" : "btn-primary"}`}
-                  onClick={(e) => { e.stopPropagation(); onFavourite(property); }}
-                >
-                  {isFavourited ? "Favourited" : "Add to Favourite"}
-                </button>
-              )}
+                  {/* Right arrow button for next image */}
+                  <button className="image-arrow right" onClick={nextImage}>❯</button>
+                </div>
 
-              <h2>Floorplan:</h2>
+                {/* RIGHT: Property information section */}
+                <div className="property-details">
+                  <h1>House in Petts Wood Road, Petts Wood, Orpington BR5</h1>
+                  <p className="property-price">£750,000</p>
+                  <p>Bedrooms: 3</p>
+                  <p>Tenure: Freehold</p>
 
-            </div>
-          </div>
+                  {/* ============= FAVOURITE BUTTON ============= */}
+                  {/* Button that toggles favorite status */}
+                  {/* CSS class changes based on isFavourited state */}
+                  <button
+                    className={`fav-btn ${isFavourited ? "favourited" : ""}`}
+                    onClick={() => {
+                      // If already favorited, remove it; otherwise add it
+                      if (isFavourited) {
+                        removeFavourite(property);
+                      } else {
+                        addFavourite(property);
+                      }
+                    }}
+                  >
+                    {/* Button text changes based on favorite status */}
+                    {isFavourited ? "Remove from Favourites" : "Add to Favourites"}
+                  </button>
+
+                  {/* THUMBNAILS - Small clickable preview images */}
+                  <div className="thumbnail-row">
+                    {/* Map through all property images to create thumbnails */}
+                    {propertyImages.map((img, index) => (
+                      <img
+                        key={index}  // Unique key for React list rendering
+                        src={img}
+                        alt="Thumbnail"
+                        // Apply 'active-thumb' class to current image thumbnail
+                        className={`thumbnail ${index === currentImage ? "active-thumb" : ""}`}
+                        // Clicking thumbnail sets it as current image
+                        onClick={() => setCurrentImage(index)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </TabPanel>
+
+            {/* ---------------- DESCRIPTION TAB ---------------- */}
+            <TabPanel>
+              <div className="property-large-description">
+                <h2>Description:</h2>
+                <p>
+                  This attractive three-bedroom semi-detached family home is situated on the ever-popular Petts Wood Road...
+                </p>
+              </div>
+            </TabPanel>
+
+            {/* ---------------- FLOORPLAN TAB ---------------- */}
+            <TabPanel>
+              <div className="fp-section">
+                <h2>Floorplan:</h2>
+
+              </div>
+            </TabPanel>
+
+            {/* ---------------- MAP TAB ---------------- */}
+            <TabPanel>
+              <div className="property-map-full">
+                <h2>Location</h2>
+                {/* Embedded Google Maps iframe */}
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18..."
+                  width="100%"
+                  height="450"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                ></iframe>
+              </div>
+            </TabPanel>
+          </Tabs>
         </div>
-
-        {/* THUMBNAILS */}
-        <div className="thumbnail-row">
-          {propertyImages.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              className={`thumbnail ${index === currentImage ? "active-thumb" : ""}`}
-              onClick={() => setCurrentImage(index)}
-            />
-          ))}
-        </div>
-
-        {/* DESCRIPTION */}
-        <div className="property-large-description">
-          <h2>Description:</h2>
-          <p>
-            A beautifully presented 2-bedroom apartment situated in the heart of Stratford.
-            Featuring modern interiors, open-plan living space, and excellent transport links
-            including Stratford Underground and the Elizabeth Line.
-          </p>
-        </div>
-
-        {/* MAP */}
-        <div className="property-map-full">
-          <h2>Location</h2>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18..."
-            width="100%"
-            height="450"
-            loading="lazy"
-          ></iframe>
-        </div>
-
       </div>
 
       <Footer />
