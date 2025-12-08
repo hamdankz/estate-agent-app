@@ -13,7 +13,7 @@ import img4 from "../../assets/Prop6-images/image4.jpeg";
 import img5 from "../../assets/Prop6-images/image5.jpeg";
 import img6 from "../../assets/Prop6-images/image6.jpeg";
 import img7 from "../../assets/Prop6-images/image7.jpeg";
-import img7 from "../../assets/Prop6-images/image8.jpeg";
+import img8 from "../../assets/Prop6-images/image8.jpeg";
 
 // Array containing all property images for the slideshow
 const propertyImages = [img1, img2, img3, img4, img5, img6, img7, img8];
@@ -25,7 +25,7 @@ function PropertyPage6() {
   // PROPERTY DATA FOR THIS PAGE
   // Hardcoded property object for this specific property page
   const property = {
-    id: 1,  // Unique identifier for this property
+    id: "prop6",  // Unique identifier for this property
     picture: img1,  // Main image
     type: "3 Bedroom Semi Detached",  // Property type
     price: 750000,  // Property price

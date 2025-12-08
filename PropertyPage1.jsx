@@ -25,7 +25,7 @@ function PropertyPage1() {
   // PROPERTY DATA FOR THIS PAGE
   // Hardcoded property object for this specific property page
   const property = {
-    id: 1,  // Unique identifier for this property
+    id: "prop1",  // Unique identifier for this property
     picture: img1,  // Main image
     type: "3 Bedroom Semi Detached",  // Property type
     price: 750000,  // Property price

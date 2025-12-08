@@ -1,23 +1,24 @@
 import { useNavigate } from "react-router-dom";
+import { usePropertyContext } from "../Context/PropertyContext"; // Import context
 
-function PropertyCard({ property, onFavourite, onRemoveFavourite, isFavourited, showRemove = false }) {
+function PropertyCard({ property, showRemove = false }) {
   const navigate = useNavigate();
+  const { addFavourite, removeFavourite, isFavourited } = usePropertyContext(); // Get from context
 
   const handleDragStart = (e) => {
     e.dataTransfer.setData("application/json", JSON.stringify(property));
   };
 
-const handleClick = () => {
-  navigate(`/property/${property.id}`); 
-};
-
+  const handleClick = () => {
+    navigate(`/property/${property.id}`); 
+  };
 
   return (
     <div
       className="property-card"
       draggable={!showRemove}
       onDragStart={handleDragStart}
-      onClick={handleClick} // Make card clickable
+      onClick={handleClick}
       style={{ cursor: !showRemove ? "pointer" : "default" }}
     >
       <img
@@ -31,19 +32,20 @@ const handleClick = () => {
         <div className="property-type">{property.type}</div>
         <div className="property-location">{property.location}</div>
         <div className="property-price">£{property.price.toLocaleString()}</div>
-
         <div className="card-description">{property.description}</div>
 
         <div className="property-action">
           {showRemove ? (
-            <button onClick={(e) => { e.stopPropagation(); onRemoveFavourite(property); }}>Remove</button>
+            <button onClick={(e) => { e.stopPropagation(); removeFavourite(property); }}>
+              Remove
+            </button>
           ) : (
             <button
-                className={`btn ${isFavourited ? "btn-disabled" : "btn-primary"}`}
-                onClick={(e) => { e.stopPropagation(); onFavourite(property); }}
-                disabled={isFavourited}
+              className={`btn ${isFavourited(property.id) ? "btn-disabled" : "btn-primary"}`}
+              onClick={(e) => { e.stopPropagation(); addFavourite(property); }}
+              disabled={isFavourited(property.id)}
             >
-                {isFavourited ? "Favourited" : "Add to Favourite"}
+              {isFavourited(property.id) ? "Favourited" : "Add to Favourite"}
             </button>
           )}
         </div>

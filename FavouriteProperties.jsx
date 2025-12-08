@@ -1,11 +1,13 @@
 import { useState } from "react";
 import ListItems from "./ListItems";
+import { usePropertyContext } from "../Context/PropertyContext"; // Import context
 
-function FavouriteProperties({ favouriteProperties, removeFavourite, onDrop, clearFavourites }) {
+function FavouriteProperties() { // Remove all props
   const [isDragOver, setIsDragOver] = useState(false);
-  const [draggedItem, setDraggedItem] = useState(null);
+  
+  // Get data from context instead of props
+  const { favourites, addFavourite, removeFavourite, clearFavourites } = usePropertyContext();
 
-  // When something is dragged over the favourite zone
   const handleDragOver = (e) => {
     e.preventDefault();
     setIsDragOver(true);
@@ -16,30 +18,13 @@ function FavouriteProperties({ favouriteProperties, removeFavourite, onDrop, cle
     setIsDragOver(false);
   };
 
-  // When something is dropped INTO favourites
   const handleDrop = (e) => {
     e.preventDefault();
     setIsDragOver(false);
-
     const data = e.dataTransfer.getData("application/json");
-    if (data) onDrop(JSON.parse(data));
-  };
-
-  // Called when user starts dragging a favourite property OUT
-  const handleFavouriteDragStart = (property) => {
-    setDraggedItem(property);
-  };
-
-  // Called when drag ends ANYWHERE
-  const handleFavouriteDragEnd = (e) => {
-    // If drag ended *outside* the favourites box → remove from favourites
-    const favouritesBox = e.target.closest(".favourites-section");
-
-    if (!favouritesBox) {
-      removeFavourite(draggedItem);
+    if (data) {
+      addFavourite(JSON.parse(data)); // Use addFavourite from context
     }
-
-    setDraggedItem(null);
   };
 
   return (
@@ -55,30 +40,26 @@ function FavouriteProperties({ favouriteProperties, removeFavourite, onDrop, cle
         Drag properties here to add to favourites
       </div>
 
-      <button className="ClearBtn" onClick={clearFavourites}>
-        Clear All
-      </button>
+      {/* ONLY show Clear All button when there ARE favorites */}
+      {favourites.length > 0 && ( // Use favourites from context
+        <button className="ClearBtn" onClick={clearFavourites}> {/* Use clearFavourites from context */}
+          Clear All
+        </button>
+      )}
 
-      {favouriteProperties.length === 0 ? (
+      {favourites.length === 0 ? ( // Use favourites from context
         <p>No favourite properties yet.</p>
       ) : (
         <ListItems
-          items={favouriteProperties}
+          items={favourites} // Use favourites from context
           renderItem={(p) => (
-            <div
-              className="favouriteItem"
-              draggable
-              onDragStart={() => handleFavouriteDragStart(p)}
-              onDragEnd={handleFavouriteDragEnd}
-            >
+            <div className="favouriteItem">
               <img src={p.picture} alt={p.type} />
-
               <div>
                 <strong>{p.type} - £{p.price.toLocaleString()}</strong>
                 <div style={{ fontSize: "12px" }}>{p.location}</div>
               </div>
-
-              <button onClick={() => removeFavourite(p)}>Remove</button>
+              <button onClick={() => removeFavourite(p)}>Remove</button> {/* Use removeFavourite from context */}
             </div>
           )}
         />

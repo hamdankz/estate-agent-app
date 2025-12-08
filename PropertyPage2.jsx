@@ -24,11 +24,13 @@ function PropertyPage2() {
   // PROPERTY DATA FOR THIS PAGE
   // Hardcoded property object for this specific property page
   const property = {
-    id: 1,  // Unique identifier for this property
+    id: "prop2",  // Unique identifier for this property
     picture: img1,  // Main image
-    type: "3 Bedroom Semi Detached",  // Property type
-    price: 750000,  // Property price
+    price: '£750,000',  // Property price
     location: "Petts Wood Road, Orpington",  // Location
+    building: "Flat",
+    bedroom: 3,
+    tenure: "freehold",
   };
 
   // Check if this property is already in favorites
@@ -91,10 +93,10 @@ function PropertyPage2() {
 
                 {/* RIGHT: Property information section */}
                 <div className="property-details">
-                  <h1>House in Petts Wood Road, Petts Wood, Orpington BR5</h1>
-                  <p className="property-price">£750,000</p>
-                  <p>Bedrooms: 3</p>
-                  <p>Tenure: Freehold</p>
+                  <h1>{property.building} in {property.location}</h1>
+                  <p className="property-price">{property.price}</p>
+                  <p>Bedrooms: {property.bedroom}</p>
+                  <p>Tenure: {property.tenure}</p>
 
                   {/* ============= FAVOURITE BUTTON ============= */}
                   {/* Button that toggles favorite status */}

@@ -1,7 +1,7 @@
 import PropertyCard from "./PropertyCard";
 
-function Properties({ properties = [], onFavourite, onRemoveFavourite, favouriteProperties = [] }) {
-
+function Properties({ properties = [] }) { // Remove other props - PropertyCard uses context
+  
   if (properties.length === 0) {
     return <div className="section">No properties match your filters.</div>;
   }
@@ -17,9 +17,7 @@ function Properties({ properties = [], onFavourite, onRemoveFavourite, favourite
           <PropertyCard
             key={property.id}
             property={property}
-            onFavourite={onFavourite}
-            onRemoveFavourite={onRemoveFavourite}
-            isFavourited={favouriteProperties.some((f) => f.id === property.id)}
+            // NO PROPS NEEDED - PropertyCard uses context directly
           />
         ))}
       </div>
