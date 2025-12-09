@@ -67,16 +67,21 @@ gap: 10px;
   background-color: #ffffff94;
 }
 
+
+
 /* ===================== HERO ===================== */
 .heroCard {
-background: #404040;
-border-radius: 16px;
-padding: 24px;
-border: 1px solid #3EB489;
-box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
-text-align: center;
-color: white;
+  background: #404040;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #3EB489;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+  text-align: center;
+  color: white;
+  max-width: 80%;
+  margin: 0 auto; /* centers the card horizontally */
 }
+
 
 /* ===================== FILTER ===================== */
 .filterSection {
@@ -225,6 +230,8 @@ border-radius: 6px;
 background-color: #34a07c;
 }
 
+
+
 /* ===================== FAVOURITES ===================== */
 .favourites-section {
   max-width: 1200px;
@@ -313,6 +320,11 @@ background-color: #34a07c;
   font-size: 12px;
 }
 
+.favouriteItem.outsideZone {
+  opacity: 0.5;
+  border: 2px dashed red;
+  transition: 0.2s;
+}
 
 /* ===================== SEARCH BOX ===================== */
 .searchBox {
@@ -357,6 +369,14 @@ margin-right: 320px;
   color: white; /* Ensure text is readable */
 }
 
+.btn-remove {
+  background-color: #6c757d !important; /* Grey for "Favourited" */
+  color: white !important;
+}
+
+.btn-remove:hover {
+  background-color: #6c757d; /* Keep grey on hover */
+}
 
 /*PROPERTY PAGE CODE*/
 
@@ -635,7 +655,6 @@ margin-right: 320px;
   border-radius: 12px;
   padding: 16px;
   border: 1px solid #3EB489; /* Optional: border color for contrast */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   text-align: center;
   color: white; /* Text color */
 
@@ -658,7 +677,7 @@ margin-right: 320px;
 .favourites-title {
   text-align: center;
   margin: 30px 0;
-  color: #333;
+  color: #3EB489;
   font-size: 2.5rem;
 }
 
@@ -668,9 +687,8 @@ margin-right: 320px;
   align-items: center;
   margin-bottom: 30px;
   padding: 20px;
-  background-color: #6c757d;
+  background-color: #5c5c5c;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .clear-all-btn {
@@ -705,47 +723,318 @@ margin-right: 320px;
   grid-column: 1 / -1;
   text-align: center;
   padding: 60px 20px;
-  background-color: #6c757d;
+  background-color: #5c5c5c;
   border-radius: 8px;
-  border: 2px dashed #6c757d;
+  border: 2px dashed #5c5c5c;
 }
 
 .no-favourites p {
-  color: #ffffff;
+  color: #ffffff68;
   font-size: 1.1rem;
   margin: 10px 0;
 }
 
 .no-favourites p:first-child {
   font-size: 1.3rem;
-  color: #495057;
+  color: #ffffff;
   font-weight: 500;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-  .favourites-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+
+/* ===================== RESPONSIVE MEDIA QUERIES ===================== */
+
+/* Smaller Laptop Screens */
+@media (max-width: 1350px) {
+  /* Header adjustments */
+  .headerRow {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
   }
-  
-  .favourites-controls {
+  .LogoImage {
+    max-width: 80px;
+    margin: 0 auto;
+  }
+  .headerbutton {
+    width: auto;
+    margin: 5px;
+  }
+
+  /* Filter section */
+  .filterForm {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    
+    gap: 15px;
+  }
+
+  /* Filter inputs and selects stretch fully */
+  .filterGroup input,
+  .filterGroup select {
+    width: 100%;
+    min-width: 0; /* ensures they shrink */
+  }
+
+  /* Filter buttons stretch */
+  .ClearBtn,
+  .filterButton {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Filter grid adjusts */
+  .filterForm {
+    grid-template-columns: 1fr; /* single column on medium screens */
+    gap: 15px;
+  }
+
+
+  /* Properties grid */
+  .properties-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    margin-left: 10px;
+  }
+
+  /* Property page */
+  .property-top-row {
+    flex-direction: column;
+  }
+  .property-images,
+  .property-details {
+    min-width: 100%;
+    flex: unset;
+  }
+  .property-images {
+    height: auto;
+  }
+  .FloorplanImage {
+    width: 100%;
+  }
+
+  /* Search page */
+  .search-page-container {
     flex-direction: column;
     gap: 15px;
-    text-align: center;
   }
-  
-  .favourites-title {
-    font-size: 2rem;
+  .search-left {
+    margin-right: 0;
+  }
+
+  .favourites-section {
+    position: static !important; /* remove fixed positioning */
+    max-width: 80%;
+    margin: 20px auto;
+    padding: 16px;
+  }
+
+  /* Remove grid margin that can cause overflow */
+  .properties-grid {
+    margin-left: 0;
+  }
+
+  /* Optional: reduce padding of filter section to prevent extra width */
+  .filterSection {
+    padding: 10px;
+    max-width: 95%;
+  }
+
+
+  /* Hero card */
+  .heroCard {
+    width: 95%;
+    margin: 20px auto;
   }
 }
 
-@media (max-width: 480px) {
-  .favourites-grid {
-    grid-template-columns: 1fr;
+/* Tablets and medium screens */
+@media (max-width: 1024px) {
+  /* Header adjustments */
+  .headerRow {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
   }
-  
-  .favourites-page-container {
-    padding: 15px;
+  .LogoImage {
+    max-width: 80px;
+    margin: 0 auto;
+  }
+  .headerbutton {
+    width: auto;
+    margin: 5px;
+  }
+
+  /* Filter section */
+  .filterForm {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    
+    gap: 15px;
+  }
+
+  /* Filter inputs and selects stretch fully */
+  .filterGroup input,
+  .filterGroup select {
+    width: 100%;
+    min-width: 0; /* ensures they shrink */
+  }
+
+  /* Filter buttons stretch */
+  .ClearBtn,
+  .filterButton {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Filter grid adjusts */
+  .filterForm {
+    grid-template-columns: 1fr; /* single column on medium screens */
+    gap: 15px;
+  }
+
+
+  /* Properties grid */
+  .properties-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    margin-left: 10px;
+  }
+
+  /* Property page */
+  .property-top-row {
+    flex-direction: column;
+  }
+  .property-images,
+  .property-details {
+    min-width: 100%;
+    flex: unset;
+  }
+  .property-images {
+    height: auto;
+  }
+  .FloorplanImage {
+    width: 100%;
+  }
+
+  /* Search page */
+  .search-page-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .search-left {
+    margin-right: 0;
+  }
+
+  .favourites-section {
+    position: static !important; /* remove fixed positioning */
+    max-width: 80%;
+    margin: 20px auto;
+    padding: 16px;
+  }
+
+  /* Remove grid margin that can cause overflow */
+  .properties-grid {
+    margin-left: 0;
+  }
+
+  /* Optional: reduce padding of filter section to prevent extra width */
+  .filterSection {
+    padding: 10px;
+    max-width: 95%;
+  }
+
+
+  /* Hero card */
+  .heroCard {
+    width: 95%;
+    margin: 20px auto;
+  }
+}
+
+/* Mobile phones and small screens */
+@media (max-width: 768px) {
+  .headerRow {
+    flex-direction: column;
+    align-items: center;
+  }
+  .headerbutton {
+    margin: 5px 0;
+  }
+
+  .filterTitle {
+    font-size: 24px;
+  }
+  /* Extra small adjustments */
+  .filterForm {
+    max-width: 100%;
+    gap: 10px;
+  }
+
+  .ClearBtn,
+  .filterButton {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .filterSection,
+  .favourites-section {
+    padding: 10px;
+    max-width: 95%;
+  }
+
+  .filterButtonWrapper {
+    justify-content: center;
+  }
+
+  .properties-grid {
+    grid-template-columns: 1fr;
+    margin-left: 0;
+    gap: 15px;
+  }
+
+  .favPage-card {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .favourites-title {
+    font-size: 1.8rem;
+  }
+  .favourites-controls {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .property-large-description,
+  .fp-section {
+    width: 100%;
+  }
+
+  .thumbnail-row {
+    justify-content: center;
+  }
+  .thumbnail {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .LogoImage {
+    max-width: 60px;
+  }
+  .headerbutton {
+    width: 100%;
+  }
+  .searchBox {
+    width: 100%;
+    max-width: 100%;
+  }
+  .property-details h1 {
+    font-size: 20px;
+  }
+  .property-price {
+    font-size: 18px;
+  }
+  .return-btn {
+    width: 80%;
   }
 }
