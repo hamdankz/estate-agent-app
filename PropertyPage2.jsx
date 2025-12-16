@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
@@ -6,6 +6,7 @@ import { usePropertyContext } from "../../Context/PropertyContext";
 
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
+// PROPERTY 2 IMAGES
 import img1 from "../../assets/Prop2-images/image1.jpeg";
 import img2 from "../../assets/Prop2-images/image2.jpeg";
 import img3 from "../../assets/Prop2-images/image3.jpeg";
@@ -13,55 +14,77 @@ import img4 from "../../assets/Prop2-images/image4.jpeg";
 import img5 from "../../assets/Prop2-images/image5.jpeg";
 import img6 from "../../assets/Prop2-images/image6.jpeg";
 import img7 from "../../assets/Prop2-images/image7.jpeg";
+import floorplan from "../../assets/Prop1-images/floorplan.jpeg";
 
-// Array containing all property images for the slideshow
+// Slideshow images
 const propertyImages = [img1, img2, img3, img4, img5, img6, img7];
 
 function PropertyPage2() {
-  // Get favorites functionality from context - this allows adding/removing favorites
   const { favourites, addFavourite, removeFavourite } = usePropertyContext();
 
-  // PROPERTY DATA FOR THIS PAGE
-  // Hardcoded property object for this specific property page
-  const property = {
-    id: "prop2",  // Unique identifier for this property
-    picture: img1,  // Main image
-    price: '£750,000',  // Property price
-    location: "Petts Wood Road, Orpington",  // Location
-    building: "Flat",
-    bedroom: 3,
-    tenure: "freehold",
-  };
-
-  // Check if this property is already in favorites
-  // .some() returns true if any favorite has the same id as this property
-  const isFavourited = favourites.some((p) => p.id === property.id);
-
-  // State to track which image is currently displayed in the slideshow
+  const [property, setProperty] = useState(null);
   const [currentImage, setCurrentImage] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-  // Function to show next image in slideshow
-  // Uses modulo operator to loop back to first image after last
+  // Fetch PROPERTY 2 from properties.json
+  useEffect(() => {
+    fetch("/properties.json")
+      .then((res) => res.json())
+      .then((data) => {
+        const prop = data.properties.find((p) => p.id === "prop2");
+        setProperty(prop || null);
+      })
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  // Slideshow controls
   const nextImage = () =>
     setCurrentImage((prev) => (prev + 1) % propertyImages.length);
 
-  // Function to show previous image in slideshow
-  // Adds propertyImages.length before modulo to handle negative values
   const prevImage = () =>
-    setCurrentImage((prev) => (prev - 1 + propertyImages.length) % propertyImages.length);
+    setCurrentImage(
+      (prev) => (prev - 1 + propertyImages.length) % propertyImages.length
+    );
+
+  // Loading state
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <p style={{ textAlign: "center", marginTop: "50px", color: "white" }}>
+          Loading property...
+        </p>
+        <Footer />
+      </>
+    );
+  }
+
+  // Property not found
+  if (!property) {
+    return (
+      <>
+        <Header />
+        <p style={{ textAlign: "center", marginTop: "50px", color: "white" }}>
+          Property not found.
+        </p>
+        <Footer />
+      </>
+    );
+  }
+
+  const isFavourited = favourites.some((p) => p.id === property.id);
 
   return (
     <>
       <Header />
 
-      {/* Button to return to search page */}
       <button className="return-btn">
         <Link to="/search">Return to Search Page</Link>
       </button>
 
       <div className="container">
         <div className="tabs-container">
-          {/* React-tabs component for tabbed interface */}
           <Tabs>
             <TabList>
               <Tab>Photos</Tab>
@@ -70,63 +93,61 @@ function PropertyPage2() {
               <Tab>Maps</Tab>
             </TabList>
 
-            {/* ---------------- PHOTOS TAB ---------------- */}
+            {/* ---------- PHOTOS TAB ---------- */}
             <TabPanel>
               <br />
-
               <div className="property-top-row">
-                {/* LEFT: Slideshow section */}
                 <div className="property-images">
-                  {/* Left arrow button for previous image */}
-                  <button className="image-arrow left" onClick={prevImage}>❮</button>
+                  <button className="image-arrow left" onClick={prevImage}>
+                    ❮
+                  </button>
 
-                  {/* Main property image that changes based on currentImage state */}
                   <img
                     src={propertyImages[currentImage]}
-                    alt="Property"
+                    alt={property.type}
                     className="property-main-image"
                   />
 
-                  {/* Right arrow button for next image */}
-                  <button className="image-arrow right" onClick={nextImage}>❯</button>
+                  <button className="image-arrow right" onClick={nextImage}>
+                    ❯
+                  </button>
                 </div>
 
-                {/* RIGHT: Property information section */}
                 <div className="property-details">
-                  <h1>{property.building} in {property.location}</h1>
-                  <p className="property-price">{property.price}</p>
-                  <p>Bedrooms: {property.bedroom}</p>
+                  <h1>
+                    {property.type} in {property.location}
+                  </h1>
+
+                  <p className="property-price">
+                    {property["displayed-price"] ||
+                      `£${property.price?.toLocaleString()}`}
+                  </p>
+
+                  <p>Bedrooms: {property.bedrooms}</p>
                   <p>Tenure: {property.tenure}</p>
 
-                  {/* ============= FAVOURITE BUTTON ============= */}
-                  {/* Button that toggles favorite status */}
-                  {/* CSS class changes based on isFavourited state */}
                   <button
                     className={`fav-btn ${isFavourited ? "favourited" : ""}`}
-                    onClick={() => {
-                      // If already favorited, remove it; otherwise add it
-                      if (isFavourited) {
-                        removeFavourite(property);
-                      } else {
-                        addFavourite(property);
-                      }
-                    }}
+                    onClick={() =>
+                      isFavourited
+                        ? removeFavourite(property)
+                        : addFavourite(property)
+                    }
                   >
-                    {/* Button text changes based on favorite status */}
-                    {isFavourited ? "Remove from Favourites" : "Add to Favourites"}
+                    {isFavourited
+                      ? "Remove from Favourites"
+                      : "Add to Favourites"}
                   </button>
 
-                  {/* THUMBNAILS - Small clickable preview images */}
                   <div className="thumbnail-row">
-                    {/* Map through all property images to create thumbnails */}
                     {propertyImages.map((img, index) => (
                       <img
-                        key={index}  // Unique key for React list rendering
+                        key={index}
                         src={img}
-                        alt="Thumbnail"
-                        // Apply 'active-thumb' class to current image thumbnail
-                        className={`thumbnail ${index === currentImage ? "active-thumb" : ""}`}
-                        // Clicking thumbnail sets it as current image
+                        alt={`Thumbnail ${index + 1}`}
+                        className={`thumbnail ${
+                          index === currentImage ? "active-thumb" : ""
+                        }`}
                         onClick={() => setCurrentImage(index)}
                       />
                     ))}
@@ -135,36 +156,39 @@ function PropertyPage2() {
               </div>
             </TabPanel>
 
-            {/* ---------------- DESCRIPTION TAB ---------------- */}
+            {/* ---------- DESCRIPTION TAB ---------- */}
             <TabPanel>
               <div className="property-large-description">
                 <h2>Description:</h2>
                 <p>
-                  This attractive three-bedroom semi-detached family home is situated on the ever-popular Petts Wood Road...
+                  {property.longdescription ||
+                    property.description ||
+                    "No description available."}
                 </p>
               </div>
             </TabPanel>
 
-            {/* ---------------- FLOORPLAN TAB ---------------- */}
+            {/* ---------- FLOORPLAN TAB ---------- */}
             <TabPanel>
               <div className="fp-section">
                 <h2>Floorplan:</h2>
-
+                <img
+                  className="FloorplanImage"
+                  src={floorplan}
+                  alt="Floorplan"
+                />
               </div>
             </TabPanel>
 
-            {/* ---------------- MAP TAB ---------------- */}
+            {/* ---------- MAP TAB ---------- */}
             <TabPanel>
               <div className="property-map-full">
                 <h2>Location</h2>
-                {/* Embedded Google Maps iframe */}
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18..."
-                  width="100%"
-                  height="450"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
+                  src={`https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodeURIComponent(
+                    property.location
+                  )}`}
+                  className="displayMaps"
                 ></iframe>
               </div>
             </TabPanel>

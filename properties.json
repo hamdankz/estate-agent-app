@@ -5,91 +5,119 @@
       "type": "House",
       "bedrooms": 3,
       "price": 750000,
+      "displayed-price": "£750,000",
       "tenure": "Freehold",
       "description": "Attractive three bedroom semi-detached family home ...",
       "location": "Petts Wood Road, Petts Wood, Orpington BR5",
       "postcode": "BR5",
       "picture": "src/assets/Prop1-images/image1.jpeg",
       "url": "properties/prop1.html",
-      "added": { "month": "October", "day": 12, "year": 2022 }
+      "added": { "month": "October", "day": 12, "year": 2022 }, 
+
+      "longdescription": "A beautifully presented three-bedroom semi-detached home situated in one of Petts Wood’s most sought-after residential roads. The property offers a bright and spacious through-lounge, a modern fitted kitchen, and a private rear garden ideal for families or entertaining. Upstairs features three well-proportioned bedrooms and a contemporary family bathroom. Located within easy reach of Petts Wood station, local shops, reputable schools, and green open spaces, this home combines comfort, convenience, and classic suburban charm."
+      
     },
     {
       "id": "prop2",
       "type": "Flat",
       "bedrooms": 2,
       "price": 399995,
+      "displayed-price": "£399,995",
       "tenure": "Freehold",
       "description": "Two double bedroom, two bathroom garden flat ...",
       "location": "Crofton Road, Orpington BR6",
       "postcode": "BR6",
       "picture": "src/assets/Prop2-images/image1.jpeg",
       "url": "properties/prop2.html",
-      "added": { "month": "September", "day": 14, "year": 2022 }
+      "added": { "month": "September", "day": 14, "year": 2022 },
+
+      "longdescription": "A well-presented two-bedroom, two-bathroom garden flat located on Crofton Road in Orpington. The property offers two spacious double bedrooms, including a principal bedroom with en-suite, along with a modern family bathroom. A bright living area opens onto a private garden, providing excellent indoor-outdoor space. Ideally positioned close to Orpington High Street, local transport links, and well-regarded schools, this home is well suited to first-time buyers, downsizers, or investors."
+
     },
     {
       "id": "prop3",
       "type": "House",
       "bedrooms": 4,
       "price": 1200000,
+      "displayed-price": "£1,200,000",
       "tenure": "Freehold",
       "description": "Spacious 4 bedroom detached home ...",
       "location": "Green Lane, Bromley BR1",
       "postcode": "BR1",
       "picture": "src/assets/Prop3-images/image1.jpeg",
       "url": "properties/prop3.html",
-      "added": { "month": "August", "day": 5, "year": 2023 }
+      "added": { "month": "August", "day": 5, "year": 2023 },
+
+      "longdescription": "An impressive four-bedroom detached family home situated on Green Lane in Bromley. This spacious property features multiple reception rooms, a large fitted kitchen, and a well-maintained private garden. Upstairs offers four generously sized bedrooms and family bathrooms, making it ideal for growing families. Conveniently located near Bromley town centre, excellent schools, and transport links into London, this home combines space, comfort, and convenience."
+
     },
     {
       "id": "prop4",
       "type": "Flat",
       "bedrooms": 1,
       "price": 250000,
+      "displayed-price": "£250,000",
       "tenure": "Leasehold",
       "description": "Compact 1 bedroom city flat ...",
       "location": "High Street, London NW1",
       "postcode": "NW1",
       "picture":"src/assets/Prop4-images/image1.jpeg",
       "url": "properties/prop4.html",
-      "added": { "month": "January", "day": 20, "year": 2023 }
+      "added": { "month": "January", "day": 20, "year": 2023 },
+
+      "longdescription": "A compact and well-located one-bedroom flat set on the High Street in London NW1. The property features an open-plan living and kitchen area, a bright double bedroom, and a modern bathroom. With shops, cafés, and excellent transport links right on the doorstep, this flat is ideal for professionals, students, or investors seeking a centrally located, low-maintenance property."
+
     },
     {
       "id": "prop5",
       "type": "House",
       "bedrooms": 5,
       "price": 950000,
+      "displayed-price": "£950,000",
       "tenure": "Freehold",
       "description": "Large 5 bedroom family home with garden ...",
       "location": "Oak Avenue, Bromley BR3",
       "postcode": "BR3",
       "picture": "src/assets/Prop5-images/image1.jpeg",
       "url": "properties/prop5.html",
-      "added": { "month": "March", "day": 15, "year": 2022 }
+      "added": { "month": "March", "day": 15, "year": 2022 },
+
+      "longdescription": "A substantial five-bedroom family home located on Oak Avenue in Bromley. The property offers generous living accommodation including a large reception room, separate dining area, a well-equipped kitchen, and a private rear garden ideal for family living and entertaining. Upstairs provides five bedrooms and family bathrooms, offering flexible space for larger households. Situated close to local schools, parks, and transport links, this is an excellent long-term family home."
+
     },
     {
       "id": "prop6",
       "type": "Flat",
       "bedrooms": 3,
       "price": 600000,
+      "displayed-price": "£600,000",
       "tenure": "Leasehold",
       "description": "Modern 3 bedroom flat in new development ...",
       "location": "River Road, London E3",
       "postcode": "E3",
       "picture": "src/assets/Prop6-images/image1.jpeg",
       "url": "properties/prop6.html",
-      "added": { "month": "May", "day": 10, "year": 2023 }
+      "added": { "month": "May", "day": 10, "year": 2023 },
+
+      "longdescription": "A modern three-bedroom flat located within a contemporary development on River Road in London E3. The property features a spacious open-plan living and kitchen area with modern finishes, three well-sized bedrooms, and stylish bathrooms. Residents benefit from a well-maintained building, secure access, and excellent transport connections, making this an ideal choice for professionals, sharers, or families seeking modern city living."
+
     },
     {
       "id": "prop7",
       "type": "House",
-      "bedrooms": 2,
-      "price": 450000,
+      "bedrooms": 6,
+      "price": 1500000,
+      "displayed-price": "£1,500,000",
       "tenure": "Freehold",
-      "description": "Cozy 2 bedroom house close to local amenities ...",
+      "description": "Cozy 6 bedroom house close to local amenities ...",
       "location": "Elm Street, London SE10",
       "postcode": "SE10",
       "picture": "src/assets/Prop7-images/image1.jpeg",
       "url": "properties/prop7.html",
-      "added": { "month": "June", "day": 25, "year": 2022 }
+      "added": { "month": "June", "day": 25, "year": 2022 },
+
+      "longdescription": "A charming six-bedroom house located on Elm Street in London SE10. The property offers a comfortable living space, a functional kitchen, and two well-proportioned bedrooms upstairs. Positioned close to local amenities, transport links, and green spaces, this home is ideal for big families, people who admire space or like spare rooms, or those looking to live in a well-connected residential area."
+
     }
   ]
 }
