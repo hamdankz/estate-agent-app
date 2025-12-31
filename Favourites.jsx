@@ -1,10 +1,11 @@
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-import PropertyCard from "../Components/PropertyCard"; // Import PropertyCard
+import PropertyCard from "../Components/PropertyCard";
 import { usePropertyContext } from "../Context/PropertyContext";
+import { Link } from "react-router-dom";
 
 function Favourites() {
-  const { favourites, removeFavourite, clearFavourites } = usePropertyContext();
+  const { favourites, clearFavourites } = usePropertyContext();
 
   return (
     <>
@@ -13,37 +14,40 @@ function Favourites() {
       <div className="favourites-page-container">
         <h1 className="favourites-title">Your Favourite Properties</h1>
         
-        {/* Show Clear All button only if there are favorites */}
+        {/* IF THERE ARE FAVOURITES IN THE LIST */}
         {favourites.length > 0 && (
           <div className="favourites-controls">
             <button 
-              className="clear-all-btn" 
+              className="clear-all-btn"  //BUTTON TO CLEAR THE FAVOURITE LIST
               onClick={clearFavourites}
             >
-              Clear All Favourites
+              Clear All Favourites ({favourites.length}) {/* DISPLAYS NUMBER OF FAVOURITES IN THE LIST */}
             </button>
-            <p className="favourites-count">
-              {favourites.length} {favourites.length === 1 ? 'property' : 'properties'} saved
-            </p>
           </div>
         )}
 
-        {/* Display favorites using PropertyCard component */}
+        {/**/}
         <div className="favourites-grid">
-          {favourites.length === 0 ? (
+          {favourites.length === 0 ? ( //IF FAVOURITE LIST IS EMPTY:
             <div className="no-favourites">
               <p>You haven't saved any favourite properties yet.</p>
               <p>Browse properties and click the "Add to Favourite" button to save them here.</p>
+              <br />
+              <Link to="/search" className="heroButton">Return to Search Page</Link>
             </div>
-          ) : (
-            favourites.map((property) => (
-              <PropertyCard
-                key={property.id}
-                property={property}
-                showRemove={true} // Show remove button instead of add button
-                // PropertyCard already uses removeFavourite from context
-              />
-            ))
+          ) : ( //ELSE, MAP THROUGH EACH PROPERTY IN THE LIST
+            favourites.map((property) => {
+          
+              if (!property) return null; //SKIP NULL DATA
+              
+              return ( //DISPLAY THE PROPERTY THROUGH ITS PROPERTY CARD
+                <PropertyCard
+                  key={property.id}
+                  property={property}
+                  showRemove={true}
+                />
+              );
+            })
           )}
         </div>
       </div>

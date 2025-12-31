@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
-import { usePropertyContext } from "../../Context/PropertyContext";
+import { usePropertyContext } from "../../Context/PropertyContext"; //ALLOWS ACCESS TO FAVOURITES
 
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
@@ -16,39 +16,39 @@ import img7 from "../../assets/Prop1-images/image7.jpeg";
 import floorplan from "../../assets/Prop1-images/floorplan.jpeg";
 
 
-// Array containing all property images for slideshow
+//ARRAY CONTAINING ALL IMAGES
 const propertyImages = [img1, img2, img3, img4, img5, img6, img7];
 
 function PropertyPage1() {
   const { favourites, addFavourite, removeFavourite } = usePropertyContext();
   const [property, setProperty] = useState(null);
   const [currentImage, setCurrentImage] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); //STATE IS CURRENTLY LOADING
 
-  // Fetch property data from properties.json
+  //FETCH PROPERTY FROM JSON FILE
   useEffect(() => {
-    fetch("/properties.json")
-      .then((res) => res.json())
+    fetch("/properties.json") //USE PROPERTY JSON FILE
+      .then((res) => res.json()) //CONVERT TO JAVASCRIPT
       .then((data) => {
-        const prop = data.properties.find((p) => p.id === "prop1");
-        setProperty(prop || null);
+        const prop = data.properties.find((p) => p.id === "prop1"); //FIND THE PROPERTY WITH SAME ID 'PROP1'
+        setProperty(prop || null); //STORE THIS PROPERTY, OR NULL IF NOT FOUND
       })
-      .catch((err) => console.error(err))
-      .finally(() => setLoading(false));
+      .catch((err) => console.error(err)) //LOG ANY ERRORS
+      .finally(() => setLoading(false)); //SINCE FOUND, SET STATUS TO NOT LOADING
   }, []);
 
-  // Handlers for image slideshow
+  //SLIDESHOW
   const nextImage = () =>
-    setCurrentImage((prev) => (prev + 1) % propertyImages.length);
+    setCurrentImage((prev) => (prev + 1) % propertyImages.length); //CURRENT IMAGE + 1 | % MEANS LOOP THROUGH IMAGES BACK TO START
   const prevImage = () =>
-    setCurrentImage((prev) => (prev - 1 + propertyImages.length) % propertyImages.length);
+    setCurrentImage((prev) => (prev - 1 + propertyImages.length) % propertyImages.length); //MOVES TO PREVIOUS IMAGE
 
-  // Show loading message while fetching
+  //IF IN LOADING STATUS / WHEN PROPERTY IS BEING SEARCHED
   if (loading) {
     return (
       <>
         <Header />
-        <p style={{ textAlign: "center", marginTop: "50px", color: "white" }}>
+        <p>
           Loading property...
         </p>
         <Footer />
@@ -56,12 +56,12 @@ function PropertyPage1() {
     );
   }
 
-  // Show message if property not found
+  //IF A PROPERTY IS NOT FOUND
   if (!property) {
     return (
       <>
         <Header />
-        <p style={{ textAlign: "center", marginTop: "50px", color: "white" }}>
+        <p>
           Property not found.
         </p>
         <Footer />
@@ -69,7 +69,7 @@ function PropertyPage1() {
     );
   }
 
-  // Check if the property is in favourites
+  //CHECKS IF PROPERTY ID IS FOUND IN FAVOURITE LIST
   const isFavourited = favourites.some((p) => p.id === property.id);
 
   return (
@@ -81,7 +81,7 @@ function PropertyPage1() {
       </button>
 
       <div className="container">
-        <div className="tabs-container">
+        <div className="tabs-container"> {/* TABS FOR ALL COMPONENTS OF PAGE */}
           <Tabs>
             <TabList>
               <Tab>Photos</Tab>
@@ -95,41 +95,42 @@ function PropertyPage1() {
               <br />
               <div className="property-top-row">
                 <div className="property-images">
-                  <button className="image-arrow left" onClick={prevImage}>❮</button>
+                  <button className="image-arrow left" onClick={prevImage}>❮</button> {/* BUTTON TO DISPLAY PREVIOUS IMAGE */}
                   <img
-                    src={propertyImages[currentImage]}
+                    src={propertyImages[currentImage]} //DISPLAY CURRENT IMAGE
                     alt={property.type || "Property"}
                     className="property-main-image"
                   />
-                  <button className="image-arrow right" onClick={nextImage}>❯</button>
+                  <button className="image-arrow right" onClick={nextImage}>❯</button> {/* BUTTON TO DISPLAY MNEXT IMAGE */}
                 </div>
 
                 <div className="property-details">
-                  <h1>{property.type} in {property.location}</h1>
+                  <h1>{property.type} in {property.location}</h1> {/*DISPLAY TYPE AND LOCATION */}
                   <p className="property-price">
-                    {property["displayed-price"] || `£${property.price?.toLocaleString()}`}
+                    {property["displayed-price"] || `£${property.price?.toLocaleString()}`} {/*DISPLAY PRICE IN GOOD FROMAT USING TOLOCATESTRING */}
                   </p>
-                  <p>Bedrooms: {property.bedrooms || "N/A"}</p>
-                  <p>Tenure: {property.tenure || "N/A"}</p>
+                  <p>Bedrooms: {property.bedrooms || "N/A"}</p> {/*DISPLAY BEDROOMS IF FOUND, ELSE DISPLAY NULL*/}
+                  <p>Tenure: {property.tenure || "N/A"}</p>   {/*DISPLAY TENURE IF FOUND, ELSE DISPLAY NULL*/}
 
                   <button
-                    className={`fav-btn ${isFavourited ? "favourited" : ""}`}
+                    className={`fav-btn ${isFavourited ? "favourited" : ""}`} //IF FAVOURITED, DISPLAY THAT ITS FAVOURITED
                     onClick={() => {
-                      if (isFavourited) removeFavourite(property);
-                      else addFavourite(property);
+                      if (isFavourited) removeFavourite(property); //IF FAVOURITED AND BUTTON CLICKED, REMOVE FAVOURITE
+                      else addFavourite(property); //IF NOT FAVOURITED AND IS CLICKED, ADD TO FAVOURITE
                     }}
                   >
-                    {isFavourited ? "Remove from Favourites" : "Add to Favourites"}
+                    {isFavourited ? "Remove from Favourites" : "Add to Favourites"} {/*DISPLAY DIFFERENT BUTTONS BASED ON SITUATION*/}
                   </button>
 
+                {/*DISPLAY ALL IMAGES IN MINI FORMAT*/}
                   <div className="thumbnail-row">
-                    {propertyImages.map((img, index) => (
+                    {propertyImages.map((img, index) => ( //MAP GOES THORUGH ALL IMAGES
                       <img
                         key={index}
                         src={img}
-                        alt={`Thumbnail ${index + 1}`}
-                        className={`thumbnail ${index === currentImage ? "active-thumb" : ""}`}
-                        onClick={() => setCurrentImage(index)}
+                        alt={`Thumbnail ${index + 1}`} 
+                        className={`thumbnail ${index === currentImage ? "active-thumb" : ""}`} //SPECIAL CLASS FOR THE CURRENT IMAGE
+                        onClick={() => setCurrentImage(index)} //IF CLICKED ON THUMBNAIL, SET THE IMAGE TO THAT SELECTED ONE
                       />
                     ))}
                   </div>
@@ -159,11 +160,7 @@ function PropertyPage1() {
                 <h2>Location</h2>
                 <iframe
                   src={`https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodeURIComponent(property.location)}`}
-                  width="100%"
-                  height="450"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
+                  className="displayMaps"
                 ></iframe>
               </div>
             </TabPanel>

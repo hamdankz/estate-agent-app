@@ -182,16 +182,18 @@ function PropertyPage2() {
 
             {/* ---------- MAP TAB ---------- */}
             <TabPanel>
-              <div className="property-map-full">
-                <h2>Location</h2>
-                <iframe
-                  src={`https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodeURIComponent(
-                    property.location
-                  )}`}
-                  className="displayMaps"
-                ></iframe>
-              </div>
-            </TabPanel>
+  <div className="property-map-full">
+    <h2>Location</h2>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.818746246475!2d0.06939267676123284!3d51.37340477178305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8ab6ac2bdc8d1%3A0xb0dde3c09939f924!2sCrofton%20Rd%2C%20Orpington!5e1!3m2!1sen!2suk!4v1766502198149!5m2!1sen!2suk"
+      className="displayMaps"
+      allowFullScreen
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
+</TabPanel>
+
           </Tabs>
         </div>
       </div>

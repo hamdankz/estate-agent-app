@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Home from "./MyPages/Home.jsx";
+import App from "./MyPages/App.jsx";
 import Search from "./MyPages/Search.jsx";
 import Favourites from "./MyPages/Favourites.jsx";
 import PropertyPage1 from "./MyPages/PropertyPages/PropertyPage1.jsx";
@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <PropertyProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<App />} />
           <Route path="/search" element={<Search />} />
           <Route path="/favourites" element={<Favourites />} />
 

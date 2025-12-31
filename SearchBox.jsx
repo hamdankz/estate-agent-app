@@ -1,3 +1,5 @@
+//CHECK LATER IF NEEDED >>
+
 function SearchBox({ searchTerm, setSearchTerm }) {
   return (
     <input
