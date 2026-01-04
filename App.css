@@ -1,4 +1,4 @@
-/* ===================== OVERALL ===================== */
+/* OVERALL */
 body, html {
 font-family: 'Arial', sans-serif;
 font-size: 16px;
@@ -13,7 +13,7 @@ color: #ffffff;
   font-family: inherit;
   }
 
-/* ===================== HEADER ===================== */
+/* HEADER */
 
 .headerRow {
 display: flex;
@@ -71,7 +71,7 @@ gap: 10px;
 
 
 
-/* ===================== HERO ===================== */
+/* HERO */
 .heroCard {
   background: #404040;
   border-radius: 16px;
@@ -81,7 +81,7 @@ gap: 10px;
   text-align: center;
   color: white;
   max-width: 80%;
-  margin: 0 auto; /* centers the card horizontally */
+  margin: 0 auto;
 }
 
 .heroButton{
@@ -106,16 +106,16 @@ gap: 10px;
 }
 
 
-/* ===================== FILTER ===================== */
+/* FILTER */
 .filterSection {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  background: #404040; /* Dark background */
+  background: #404040;
   padding: 20px;
   border-radius: 12px;
   border: 1px solid #3EB489;
-  color: white; /* Text color */
+  color: white;
 }
 
 .filterTitle {
@@ -209,7 +209,7 @@ width: 300px;
 }
 
 
-/* ===================== PROPERTIES GRID ===================== */
+/* PROPEPRTIES GRID */
 .properties-grid {
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -219,13 +219,13 @@ margin-left: 45px;
 }
 
 .property-card {
-  background: #404040; /* Dark background */
+  background: #404040;
   border-radius: 12px;
   padding: 16px;
-  border: 1px solid #3EB489; /* Optional: border color for contrast */
+  border: 1px solid #3EB489;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   text-align: center;
-  color: white; /* Text color */
+  color: white;
 }
 
 .property-image {
@@ -255,15 +255,15 @@ background-color: #34a07c;
 
 
 
-/* ===================== FAVOURITES ===================== */
+/* FAVOURITE */
 .favourites-section {
   max-width: 1200px;
   margin-top: 45px;
   padding-right: 16px;
-  background-color: #404040; /* Dark background */
+  background-color: #404040;
   border-radius: 12px;
   border: 1px solid #3EB489;
-  color: white; /* Make text readable */
+  color: white;
 }
 
 .favouriteDropZone {
@@ -275,13 +275,13 @@ background-color: #34a07c;
   margin-bottom: 12px;
   border-radius: 8px;
   color: white;
-  background-color: #595959; /* Dark background */
+  background-color: #595959;
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .favouriteDropZone.dragOver {
   border-color: #007bff;
-  background-color: #505050; /* Slightly lighter on drag over */
+  background-color: #505050;
 }
 
 .favouriteItem {
@@ -289,7 +289,7 @@ background-color: #34a07c;
   align-items: center;
   gap: 12px;
   margin-bottom: 10px;
-  background-color: #505050; /* Dark card background */
+  background-color: #505050;
   padding: 8px;
   border-radius: 8px;
   border: 1px solid #3EB489;
@@ -327,7 +327,7 @@ background-color: #34a07c;
 }
 
 .favouriteItem img {
-  width: 60px;     /* smaller thumbnail size */
+  width: 60px;
   height: 50px;
   object-fit: cover;
   border-radius: 6px;
@@ -349,7 +349,7 @@ background-color: #34a07c;
   transition: 0.2s;
 }
 
-/* ===================== SEARCH BOX ===================== */
+/* SEARCH BOX */
 .searchBox {
 width: 100%;
 max-width: 400px;
@@ -362,7 +362,7 @@ border-radius: 8px;
 box-sizing: border-box;
 }
 
-/* ===================== SEARCH PAGE ===================== */
+/* SEARCH PAGE */
 .search-page-container {
 display: flex;
 gap: 20px;
@@ -384,53 +384,53 @@ margin-right: 320px;
   width: 300px;
   max-height: 610px;
   overflow-y: auto;
-  background-color: #404040; /* Dark background */
+  background-color: #404040; 
   border: 1px solid #3EB489;
   border-radius: 12px;
   padding: 16px;
   z-index: 999;
-  color: white; /* Ensure text is readable */
+  color: white;
 }
 
 .btn-remove {
-  background-color: #6c757d !important; /* Grey for "Favourited" */
+  background-color: #6c757d !important; 
   color: white !important;
 }
 
 .btn-remove:hover {
-  background-color: #6c757d; /* Keep grey on hover */
+  background-color: #6c757d;
 }
 
 /*PROPERTY PAGE CODE*/
 
 .return-btn {
-  display: inline-block;             /* Makes width respected and allows padding */
+  display: inline-block;
   width: 12.5%;
   height: 40px;
   margin: 10px;
   padding: 0 15px;
-  background-color: rgba(180, 62, 62, 0.6); /* Semi-transparent red */
-  border: 2px solid #b43e3e;        /* Visible border for a cleaner look */
-  border-radius: 8px;                /* Rounded corners for modern style */
-  color: white;                      /* Text color */
-  font-weight: 600;                  /* Slightly bolder text */
+  background-color: rgba(180, 62, 62, 0.6);
+  border: 2px solid #b43e3e;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.3s ease;         /* Smooth hover effect */
+  transition: all 0.3s ease;
 }
 
 .return-btn:hover {
-  background-color: #b43e3e;        /* Darker solid red on hover */
+  background-color: #b43e3e;
   color: #fff;
-  border-color: #7a2a2a;            /* Darker border for depth */
-  transform: translateY(-2px);      /* Slight lift effect */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Subtle shadow */
+  border-color: #7a2a2a; 
+  transform: translateY(-2px); 
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
 }
 
 .return-btn:active {
-  transform: translateY(0);         /* Reset lift on click */
-  box-shadow: none;                 /* Remove shadow when clicked */
+  transform: translateY(0);        
+  box-shadow: none;                 
 }
 
 
@@ -462,7 +462,7 @@ margin-right: 320px;
 .property-main-image {
   width: 100%;
   border-radius: 12px;
-  object-fit: cover; /* fills nicely */
+  object-fit: cover;
   max-width: 100%;
   max-height: 100%;
 }
@@ -516,7 +516,7 @@ margin-right: 320px;
   background-color: #3eb48995;
 }
 
-/* When favourited */
+
 .fav-btn.favourited {
   background-color: grey;
   cursor: not-allowed;
@@ -529,7 +529,7 @@ margin-right: 320px;
   position: relative;
   flex: 2;
   min-width: 300px;
-  height: 450px; /* FIXED HEIGHT — adjust as needed */
+  height: 450px; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -572,7 +572,7 @@ margin-right: 320px;
 }
 
 
-/* Large Description below the images, above map */
+/* LARGE DESCRIPTION */
 .property-large-description {
   width: 96.5%;
   background-color: #404040;
@@ -592,7 +592,7 @@ margin-right: 320px;
 }
 
 
-/* Floorplan image */
+/* FLOORPLAN */
 
 .FloorplanImage{
   border: 1px solid #3EB489;
@@ -614,7 +614,6 @@ margin-right: 320px;
 
 /* SLIDESHOW */
 
-/* Thumbnail strip */
 .thumbnail-row {
   display: flex;
   gap: 8px;
@@ -683,14 +682,14 @@ margin-right: 320px;
 /* FAVOURITE PAGE */  
 
 .favPage-card{
-  background: #404040; /* Dark background */
+  background: #404040;
   width: 20%;
   margin: 24px;
   border-radius: 12px;
   padding: 16px;
-  border: 1px solid #3EB489; /* Optional: border color for contrast */
+  border: 1px solid #3EB489; 
   text-align: center;
-  color: white; /* Text color */
+  color: white; 
 
 }
 
@@ -701,7 +700,6 @@ margin-right: 320px;
   border-radius: 8px;
   }
 
-  /* Favourites page styles */
 .favourites-page-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -775,11 +773,11 @@ margin-right: 320px;
 }
 
 
-/* ===================== RESPONSIVE MEDIA QUERIES ===================== */
+/* RESPONSIVEMNESS */
 
-/* Smaller Laptop Screens */
+/* LAPTOP AND MONITOR */
 @media (max-width: 1350px) {
-  /* Header adjustments */
+
   .headerRow {
     flex-wrap: wrap;
     justify-content: center;
@@ -794,41 +792,41 @@ margin-right: 320px;
     margin: 5px;
   }
 
-  /* Filter section */
+
   .filterForm {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     
     gap: 15px;
   }
 
-  /* Filter inputs and selects stretch fully */
+
   .filterGroup input,
   .filterGroup select {
     width: 100%;
-    min-width: 0; /* ensures they shrink */
+    min-width: 0;
   }
 
-  /* Filter buttons stretch */
+
   .ClearBtn,
   .filterButton {
     width: 100%;
     max-width: 100%;
   }
 
-  /* Filter grid adjusts */
+
   .filterForm {
-    grid-template-columns: 1fr; /* single column on medium screens */
+    grid-template-columns: 1fr; 
     gap: 15px;
   }
 
 
-  /* Properties grid */
+
   .properties-grid {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     margin-left: 10px;
   }
 
-  /* Property page */
+
   .property-top-row {
     flex-direction: column;
   }
@@ -844,7 +842,7 @@ margin-right: 320px;
     width: 100%;
   }
 
-  /* Search page */
+
   .search-page-container {
     flex-direction: column;
     gap: 15px;
@@ -854,34 +852,33 @@ margin-right: 320px;
   }
 
   .favourites-section {
-    position: static !important; /* remove fixed positioning */
+    position: static !important; 
     max-width: 80%;
     margin: 20px auto;
     padding: 16px;
   }
 
-  /* Remove grid margin that can cause overflow */
+
   .properties-grid {
     margin-left: 0;
   }
 
-  /* Optional: reduce padding of filter section to prevent extra width */
   .filterSection {
     padding: 10px;
     max-width: 95%;
   }
 
 
-  /* Hero card */
+
   .heroCard {
     width: 95%;
     margin: 20px auto;
   }
 }
 
-/* Tablets and medium screens */
+/* IPADS */
 @media (max-width: 1024px) {
-  /* Header adjustments */
+
   .headerRow {
     flex-wrap: wrap;
     justify-content: center;
@@ -896,41 +893,41 @@ margin-right: 320px;
     margin: 5px;
   }
 
-  /* Filter section */
+
   .filterForm {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     
     gap: 15px;
   }
 
-  /* Filter inputs and selects stretch fully */
+
   .filterGroup input,
   .filterGroup select {
     width: 100%;
-    min-width: 0; /* ensures they shrink */
+    min-width: 0; 
   }
 
-  /* Filter buttons stretch */
+
   .ClearBtn,
   .filterButton {
     width: 100%;
     max-width: 100%;
   }
 
-  /* Filter grid adjusts */
+
   .filterForm {
-    grid-template-columns: 1fr; /* single column on medium screens */
+    grid-template-columns: 1fr;
     gap: 15px;
   }
 
 
-  /* Properties grid */
+
   .properties-grid {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     margin-left: 10px;
   }
 
-  /* Property page */
+
   .property-top-row {
     flex-direction: column;
   }
@@ -946,7 +943,7 @@ margin-right: 320px;
     width: 100%;
   }
 
-  /* Search page */
+
   .search-page-container {
     flex-direction: column;
     gap: 15px;
@@ -956,32 +953,31 @@ margin-right: 320px;
   }
 
   .favourites-section {
-    position: static !important; /* remove fixed positioning */
+    position: static !important; 
     max-width: 80%;
     margin: 20px auto;
     padding: 16px;
   }
 
-  /* Remove grid margin that can cause overflow */
+
   .properties-grid {
     margin-left: 0;
   }
 
-  /* Optional: reduce padding of filter section to prevent extra width */
+ 
   .filterSection {
     padding: 10px;
     max-width: 95%;
   }
 
 
-  /* Hero card */
   .heroCard {
     width: 95%;
     margin: 20px auto;
   }
 }
 
-/* Mobile phones and small screens */
+/* PHONES */
 @media (max-width: 768px) {
   .headerRow {
     flex-direction: column;
@@ -994,7 +990,7 @@ margin-right: 320px;
   .filterTitle {
     font-size: 24px;
   }
-  /* Extra small adjustments */
+
   .filterForm {
     max-width: 100%;
     gap: 10px;
@@ -1050,7 +1046,7 @@ margin-right: 320px;
   }
 }
 
-/* Extra small devices */
+/* SMALL DEVICE */
 @media (max-width: 480px) {
   .LogoImage {
     max-width: 60px;

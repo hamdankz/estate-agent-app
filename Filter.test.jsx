@@ -19,12 +19,12 @@ describe("Filter Component", () => {
     render(<Filter/>);
 
     // PROPERTY TYPE SELECT
-    const typeSelect = screen.getByLabelText(/Property Type/i);
+    const typeSelect = screen.getByTestId('property-type');
     expect(typeSelect).toBeInTheDocument();
     expect(typeSelect.value).toBe(""); //DEFAULT IS ANY
 
     // POSTCODE INPUT
-    const postcodeInput = screen.getByPlaceholderText(/BR5, SE20, etc\./i);
+    const postcodeInput = screen.getByTestId('postcode-input');
     expect(postcodeInput).toBeInTheDocument();
     expect(postcodeInput.value).toBe("");
 
@@ -43,16 +43,16 @@ describe("Filter Component", () => {
     expect(bedroomSliders[1].value).toBe("6"); // [1] IS MAXBEDS
 
     // DATE PICKER
-    const dateInput = screen.getByLabelText(/Date Added/i);
+    const dateInput = screen.getByTestId("date-added");
     expect(dateInput).toBeInTheDocument();
     expect(dateInput.value).toBe("");
 
     // SEARCH BUTTON
-    const searchButton = screen.getByRole("button", { name: /Search/i });
+    const searchButton = screen.getByTestId("search-button");
     expect(searchButton).toBeInTheDocument();
 
     // RESET BUTTON
-    const resetButton = screen.getByRole("button", { name: /Reset/i });
+    const resetButton = screen.getByTestId("reset-button");
     expect(resetButton).toBeInTheDocument();
 
   })
@@ -62,7 +62,7 @@ describe("Filter Component", () => {
     const user = userEvent.setup();
     render(<Filter />);
 
-    const typeSelect = screen.getByLabelText(/Property Type/i);
+    const typeSelect = screen.getByTestId('property-type');
     expect(typeSelect).toBeInTheDocument();
     expect(typeSelect.value).toBe(""); //SHOULD CURRENTLY BE ON ANY
 
@@ -79,7 +79,7 @@ describe("Filter Component", () => {
     const user = userEvent.setup();
     render(<Filter />);
 
-    const typeSelect = screen.getByLabelText(/Property Type/i);
+    const typeSelect = screen.getByTestId('property-type');
     expect(typeSelect.value).toBe(""); //SHOULD CURRENTLY BE ON DEFAULY
 
     //SELECT FLAT
@@ -87,7 +87,7 @@ describe("Filter Component", () => {
     expect(typeSelect.value).toBe("Flat"); //EXPECT VALUE TO NOW BE FLAT
 
     //CLICK THE RESET BUTTON
-    const resetButton = screen.getByRole("button", { name: /Reset/i });
+    const resetButton = screen.getByTestId("reset-button");
     await user.click(resetButton);
 
     //EXPECT PROPERTY TYPE TO RETURN BACK TO DEFAULT ANY

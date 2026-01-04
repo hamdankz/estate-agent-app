@@ -50,13 +50,19 @@ function Filter({ onSearch }) {
 
         {/* PROPERTY TYPE */}
         <div className="filterGroup">
-          <label>Property Type</label>
-          <select value={type} onChange={(e) => setType(e.target.value)}>
-            <option value="">Any</option> 
-            <option value="House">House</option>
-            <option value="Flat">Flat</option>
-          </select>
-        </div>
+  <label htmlFor="propertyType">Property Type</label>
+  <select
+    id="propertyType"
+    data-testid="property-type"
+    value={type}
+    onChange={(e) => setType(e.target.value)}
+  >
+    <option value="">Any</option> 
+    <option value="House">House</option>
+    <option value="Flat">Flat</option>
+  </select>
+</div>
+
 
         {/* POSTCODE */}
         <div className="filterGroup">
@@ -64,6 +70,7 @@ function Filter({ onSearch }) {
           <input
             type="text"
             placeholder="BR5, SE20, etc."
+            data-testid="postcode-input"
             value={postcode}
             onChange={(e) => setPostcode(e.target.value)}
           />
@@ -81,6 +88,8 @@ function Filter({ onSearch }) {
     min="0" 
     max="1500000"
     step="50000"
+    className="minPrice"
+    data-testid="minPrice"
     value={minPrice}
     onChange={(e) => {
       const value = Number(e.target.value);
@@ -133,20 +142,25 @@ function Filter({ onSearch }) {
 </div>
 
 
-        {/* DATE PICKER */}
-        <div className="filterGroup">
-          <label>Date Added</label>
-          <input
-            type="date"
-            value={dateAdded}
-            onChange={(e) => setDateAdded(e.target.value)}
-          />
-        </div>
+<div className="filterGroup">
+  <label htmlFor="dateAdded">Date Added</label>
+  <input
+    type="date"
+    id="dateAdded"
+    data-testid="date-added"
+    value={dateAdded}
+    onChange={(e) => setDateAdded(e.target.value)}
+  />
+</div>
+
 
         {/* BUTTONS */}
         <div className="filterButtonWrapper">
-          <button className="filterButton" type="submit">Search</button>
-          <button type="button" className="resetButton" onClick={resetFilters}>
+          <button className="filterButton" type="submit" data-testid="search-button">Search</button>
+
+
+          <button type="button" className="resetButton" onClick={resetFilters} data-testid="reset-button">
+            
             Reset
           </button>
         </div>

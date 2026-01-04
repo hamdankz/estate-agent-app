@@ -27,8 +27,9 @@ describe("PropertyCard Component", () => {
       </PropertyProvider>
     );
 
+
     //CLICK THE FAVOURITE BUTTON
-    const favButton = screen.getByText("Add to Favourite");
+    const favButton = await screen.findByText("Add to Favourites");
     //EXPECT IT TO BE FAVOURITED
     await user.click(favButton);
 
@@ -41,7 +42,7 @@ describe("PropertyCard Component", () => {
 
 
 
-  
+
 
   it("removes property from favourites when clicked again", async () => {
     const user = userEvent.setup();
